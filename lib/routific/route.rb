@@ -1,14 +1,19 @@
 module RoutificApi
   # This class represents the resulting route returned by the Routific API
   class Route
-    attr_reader :status, :fitness, :unserved, :vehicleRoutes
+    attr_reader :status, :unserved, :vehicleRoutes, :total_travel_time, :total_idle_time
 
     # Constructor
-    def initialize(status, fitness, unserved)
+    def initialize(status:, unserved: {}, total_travel_time: 0, total_idle_time: 0)
       @status = status
-      @fitness = fitness
       @unserved = unserved
-      @vehicleRoutes = Hash.new()
+      @total_idle_time = total_idle_time
+      @total_travel_time = total_travel_time
+      @vehicleRoutes = {}
+    end
+
+    def number_of_unserved
+      unserved.count
     end
 
     # Adds a new way point for the specified vehicle
@@ -25,9 +30,8 @@ module RoutificApi
       # Parse the JSON representation of a route, and return it as a Route object
       def parse(routeJson)
         status = routeJson["status"]
-        fitness = routeJson["fitness"]
         unserved = routeJson["unserved"]
-        route = RoutificApi::Route.new(status, fitness, unserved)
+        route = RoutificApi::Route.new(status: status, unserved: unserved)
 
         # Get way points for each vehicles
         routeJson["solution"].each do |vehicle_name, way_points|
