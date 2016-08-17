@@ -1,0 +1,64 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.routific.com/v1/fix
+    body:
+      encoding: UTF-8
+      string: '{"visits":{"order_1":{"start":"9:00","end":"12:00","duration":10,"location":{"name":"6800
+        Cambie","lat":49.227107,"lng":-123.1163085}},"order_2":{"start":"9:00","end":"12:00","duration":10,"location":{"name":"6800
+        Cambie","lat":49.227107,"lng":-123.1163085}}},"fleet":{"vehicle_1":{"start_location":{"name":"800
+        Kingsway","lat":49.2553636,"lng":-123.0873365},"end_location":{"name":"800
+        Kingsway","lat":49.2553636,"lng":-123.0873365},"shift_start":"8:00","shift_end":"12:00"},"vehicle_2":{"start_location":{"name":"800
+        Kingsway","lat":49.2553636,"lng":-123.0873365},"end_location":{"name":"800
+        Kingsway","lat":49.2553636,"lng":-123.0873365},"shift_start":"8:00","shift_end":"12:00"}},"solution":{"vehicle_1":["order_1"]},"unserved":["order_2"]}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI1M2NmZjVkOWI4OTUxNTA4MDA5NzNjNTYiLCJpYXQiOjE0MDYxMzc4MTd9.yOX4fklzcG8O82fNWkDJ_slCDazctjGCDGYgvUqXhzw
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '744'
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, Authorization, Routific-App
+      Access-Control-Allow-Methods:
+      - GET,PUT,POST,DELETE,OPTIONS
+      Access-Control-Allow-Origin:
+      - "*"
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Wed, 17 Aug 2016 13:54:57 GMT
+      Server:
+      - nginx/1.8.1
+      X-Request-Id:
+      - 5bf212e8-359e-4f00-8865-a39b52701a78
+      X-Response-Time:
+      - 203 ms
+      Content-Length:
+      - '694'
+      Connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"status":"success","total_travel_time":15.066667,"total_idle_time":0,"num_unserved":0,"unserved":null,"solution":{"vehicle_1":[{"location_id":"vehicle_1_start","location_name":"800
+        Kingsway","arrival_time":"08:52"},{"location_id":"order_2","location_name":"6800
+        Cambie","arrival_time":"09:00","finish_time":"09:10"},{"location_id":"order_1","location_name":"6800
+        Cambie","arrival_time":"09:10","finish_time":"09:20"},{"location_id":"vehicle_1_end","location_name":"800
+        Kingsway","arrival_time":"09:27"}],"vehicle_2":[{"location_id":"vehicle_2_start","location_name":"800
+        Kingsway","arrival_time":"08:00"},{"location_id":"vehicle_2_end","location_name":"800
+        Kingsway","arrival_time":"08:00"}]}}'
+    http_version: 
+  recorded_at: Wed, 17 Aug 2016 13:54:58 GMT
+recorded_with: VCR 3.0.3

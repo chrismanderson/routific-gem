@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name              = 'routific'
-  s.version           = '1.1.1'
+  s.version           = '1.2.0'
   s.date              = '2016-08-12'
   s.add_runtime_dependency('rest-client', '~> 1.7')
   s.add_runtime_dependency('json', '~> 1.8')
