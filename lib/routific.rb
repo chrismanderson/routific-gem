@@ -1,4 +1,4 @@
-require 'rest-client'
+require 'faraday'
 require 'json'
 
 require_relative './routific/location'
@@ -138,13 +138,13 @@ class Routific
     end
 
     def post_request(data, base_token, url = 'https://api.routific.com/v1/vrp')
-      RestClient.post(
-        url,
-        data.to_json,
-        Authorization: prefixed_token(base_token),
-        content_type: :json,
-        accept: :json
-      )
+      conn = Faraday.new(url: url)
+      conn.headers['Content-Type'] = 'application/json'
+      conn.headers['Authorization'] = prefixed_token(base_token)
+
+      conn.post do |req|
+        req.body = data.to_json
+      end.body
     end
 
     def validate_token(token)
