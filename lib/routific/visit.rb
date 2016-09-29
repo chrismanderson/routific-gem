@@ -27,18 +27,19 @@ module RoutificApi
 
     # Returns the JSON representation of this object
     # def to_json(options = nil)
-    def as_json(options = nil)
-      jsonData = {}
-      jsonData["start"] = self.start if self.start
-      jsonData["end"] = self.end if self.end
-      jsonData["duration"] = self.duration if self.duration
-      jsonData["demand"] = self.demand if self.demand
-      jsonData["location"] = self.location.as_json
+    def as_json(_options = nil)
+      json = {}
+      json["start"] = self.start if self.start
+      json["end"] = self.end if self.end
+      json["duration"] = self.duration if self.duration
+      json["demand"] = self.demand if self.demand
+      json["location"] = self.location.as_json
 
-      jsonData
+      json
     end
 
     private
+
     # Validates the parameters being provided
     # Raises an ArgumentError if any of the required parameters is not provided.
     # Required parameters are: location

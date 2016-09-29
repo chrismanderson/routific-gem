@@ -1,0 +1,43 @@
+Style/StringLiterals:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Documentation:
+    Enabled: false
+
+Style/Proc:
+  Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+EndAlignment:
+  AlignWith: variable
+
+Metrics/LineLength:
+  Max: 160
+
+Metrics/MethodLength:
+  CountComments: false  # count full line comments?
+  Max: 20
+
+Style/HashSyntax:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.3
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+
+Rails/Delegate:
+  Enabled: false

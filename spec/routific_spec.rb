@@ -22,15 +22,15 @@ describe Routific do
 
     describe "#options" do
       it "is instance of a Routific::Options" do
-        routific.setOptions(Factory::ROUTE_OPTIONS_PARAMS)
+        routific.add_options(Factory::ROUTE_OPTIONS_PARAMS)
         expect(routific.options).to be_instance_of(RoutificApi::Options)
       end
     end
 
-    describe "#setVisit" do
+    describe "#add_visit" do
       let(:id) { Faker::Lorem.word }
       before do
-        routific.setVisit(id, Factory::VISIT_PARAMS)
+        routific.add_visit(id, Factory::VISIT_PARAMS)
       end
 
       it "adds location 1 into visits" do
@@ -42,11 +42,11 @@ describe Routific do
       end
     end
 
-    describe "#setVehicle" do
+    describe "#add_vehicle" do
       let(:id) { Faker::Lorem.word }
 
       before do
-        routific.setVehicle(id, Factory::VEHICLE_PARAMS)
+        routific.add_vehicle(id, Factory::VEHICLE_PARAMS)
       end
 
       it "adds vehicle into fleet" do
@@ -58,9 +58,9 @@ describe Routific do
       end
     end
 
-    describe "#setOptions" do
+    describe "#add_options" do
       before do
-        routific.setOptions(Factory::ROUTE_OPTIONS_PARAMS)
+        routific.add_options(Factory::ROUTE_OPTIONS_PARAMS)
       end
 
       it "adds an options hash into options" do
@@ -76,55 +76,51 @@ describe Routific do
       end
     end
 
-    describe "#getRoute" do
+    describe "#get_route" do
       before do
-        routific.setVisit("order_1", {
+        routific.add_visit(
+          "order_1",
           "start" => "9:00",
           "end" => "12:00",
           "duration" => 10,
           "location" => {
             "name" => "6800 Cambie",
             "lat" => 49.227107,
-            "lng" => -123.1163085,
+            "lng" => -123.1163085
           }
-        })
+        )
 
-        routific.setVehicle("vehicle_1", {
+        routific.add_vehicle(
+          "vehicle_1",
           "start_location" => {
             "name" => "800 Kingsway",
             "lat" => 49.2553636,
-            "lng" => -123.0873365,
+            "lng" => -123.0873365
           },
           "end_location" => {
             "name" => "800 Kingsway",
             "lat" => 49.2553636,
-            "lng" => -123.0873365,
+            "lng" => -123.0873365
           },
           "shift_start" => "8:00",
-          "shift_end" => "12:00",
-        })
+          "shift_end" => "12:00"
+        )
       end
 
       it "returns a Route instance" do
         VCR.use_cassette 'routific/api_response/get_route' do
-          route = routific.getRoute()
+          route = routific.get_route
           expect(route).to be_instance_of(RoutificApi::Route)
         end
       end
 
       it "attaches optional data hash" do
-        routific.setOptions({
+        routific.add_options(
           "traffic" => "slow"
-        })
-
-        data = {
-          visits: routific.visits,
-          fleet: routific.fleet,
-          options: routific.options
-        }
+        )
 
         VCR.use_cassette 'routific/api_response/with_data_hash' do
-          route = routific.getRoute()
+          route = routific.get_route
           expect(route).to be_instance_of(RoutificApi::Route)
         end
       end
@@ -132,9 +128,9 @@ describe Routific do
   end
 
   describe "class methods" do
-    describe ".setToken" do
+    describe ".token" do
       before do
-        Routific.setToken(ENV["API_KEY"])
+        Routific.token = ENV["API_KEY"]
       end
 
       it "sets default Routific API token" do
@@ -142,10 +138,10 @@ describe Routific do
       end
     end
 
-    describe ".getRoute" do
+    describe ".get_route" do
       describe "access token is nil" do
         it "throws an ArgumentError" do
-          expect { Routific.getRoute({}, nil) }.to raise_error(ArgumentError)
+          expect { Routific.get_route({}, nil) }.to raise_error(ArgumentError)
         end
       end
 
@@ -187,42 +183,42 @@ describe Routific do
 
         describe "access token is set" do
           before do
-            Routific.setToken(ENV["API_KEY"])
+            Routific.token = ENV["API_KEY"]
           end
 
           it "returns a Route instance" do
             VCR.use_cassette 'routific/api_response' do
-              expect(Routific.getRoute(@data)).to be_instance_of(RoutificApi::Route)
+              expect(Routific.get_route(@data)).to be_instance_of(RoutificApi::Route)
             end
           end
         end
 
         describe "access token is provided" do
           before do
-            Routific.setToken(nil)
+            Routific.token = nil
           end
 
           it "returns a Route instance" do
             VCR.use_cassette 'routific/api_response' do
-              expect(Routific.getRoute(@data, ENV["API_KEY"])).to be_instance_of(RoutificApi::Route)
+              expect(Routific.get_route(@data, ENV["API_KEY"])).to be_instance_of(RoutificApi::Route)
             end
           end
 
           it "still successful even if missing prefix 'bearer ' in key" do
-            key = ENV["API_KEY"].sub /bearer /, ''
+            key = ENV["API_KEY"].sub(/bearer /, '')
             expect(/bearer /.match(key).nil?).to be true
             VCR.use_cassette 'routific/api_response' do
-              expect(Routific.getRoute(@data, key)).to be_instance_of(RoutificApi::Route)
+              expect(Routific.get_route(@data, key)).to be_instance_of(RoutificApi::Route)
             end
           end
         end
       end
     end
 
-    describe ".fixRoute" do
+    describe ".fix_route" do
       describe "access token is nil" do
         it "throws an ArgumentError" do
-          expect { Routific.getRoute({}, nil) }.to raise_error(ArgumentError)
+          expect { Routific.get_route({}, nil) }.to raise_error(ArgumentError)
         end
       end
 
@@ -292,32 +288,33 @@ describe Routific do
 
         describe "access token is set" do
           before do
-            Routific.setToken(ENV["API_KEY"])
+            Routific.token = ENV["API_KEY"]
           end
 
           it "returns a Route instance" do
             VCR.use_cassette 'routific/api_response/fix' do
-              expect(Routific.fixRoute(@data)).to be_instance_of(RoutificApi::Route)
+              expect(Routific.fix_route(@data)).to be_instance_of(RoutificApi::Route)
             end
           end
         end
 
         describe "access token is provided" do
           before do
-            Routific.setToken(nil)
+            # clear out the token
+            Routific.token = nil
           end
 
           it "returns a Route instance" do
             VCR.use_cassette 'routific/api_response/fix' do
-              expect(Routific.fixRoute(@data, ENV["API_KEY"])).to be_instance_of(RoutificApi::Route)
+              expect(Routific.fix_route(@data, ENV["API_KEY"])).to be_instance_of(RoutificApi::Route)
             end
           end
 
           it "still successful even if missing prefix 'bearer ' in key" do
-            key = ENV["API_KEY"].sub /bearer /, ''
+            key = ENV["API_KEY"].sub(/bearer /, '')
             expect(/bearer /.match(key).nil?).to be true
             VCR.use_cassette 'routific/api_response/fix' do
-              expect(Routific.fixRoute(@data, key)).to be_instance_of(RoutificApi::Route)
+              expect(Routific.fix_route(@data, key)).to be_instance_of(RoutificApi::Route)
             end
           end
         end

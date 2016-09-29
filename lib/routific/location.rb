@@ -20,10 +20,10 @@ module RoutificApi
       @name = params["name"]
     end
 
-    def ==(another_location)
-      self.name == another_location.name &&
-        self.lat == another_location.lat &&
-        self.lng == another_location.lng
+    def ==(other)
+      self.name == other.name &&
+        self.lat == other.lat &&
+        self.lng == other.lng
     end
 
     def to_json(options = nil)
@@ -32,21 +32,22 @@ module RoutificApi
 
     # Returns the JSON representation of this object
     # def to_json(options = nil)
-    def as_json(options = nil)
-      jsonData = {}
-      jsonData["name"] = self.name if self.name
-      jsonData["lat"] = self.lat
-      jsonData["lng"] = self.lng
+    def as_json(_options = nil)
+      json = {}
+      json["name"] = self.name if self.name
+      json["lat"] = self.lat
+      json["lng"] = self.lng
 
-      jsonData
+      json
     end
 
     private
+
     # Validates the parameters being provided
     # Raises an ArgumentError if any of the required parameters is not provided.
     # Required parameters are: latitude and longitude
     def validate(params)
-      if(params["lat"].nil? || params["lng"].nil?)
+      if params["lat"].nil? || params["lng"].nil?
         raise ArgumentError, "'lat' and 'lng' parameters must be provided"
       end
     end

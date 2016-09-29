@@ -6,6 +6,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency('json', '~> 1.8')
   s.add_development_dependency('rspec', '~> 3.0')
   s.add_development_dependency('faker', '~> 1.4')
+  s.add_development_dependency('byebug')
   s.add_development_dependency('vcr')
   s.add_development_dependency('webmock')
   s.add_development_dependency('dotenv', '~> 0.11')
