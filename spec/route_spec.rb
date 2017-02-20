@@ -42,4 +42,10 @@ describe RoutificApi::Route do
       expect(route.vehicleRoutes[Factory::VEHICLE_NAME]).to include(Factory::WAY_POINT)
     end
   end
+
+  describe "#parse" do
+    it "does not fail when fed extra parameters" do
+      expect { RoutificApi::Route.new(status: 'success', extra: 'extra') }.to_not raise_error
+    end
+  end
 end
