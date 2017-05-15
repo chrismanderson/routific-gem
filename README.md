@@ -96,7 +96,7 @@ Both getRoute functions return the Route object, which has the following attribu
  - status: A sanity check, will always be success when the HTTP code is 200
  - fitness: Total travel-time, representing the fitness score of the solution (less is better)
  - unserved: List of visits that could not be scheduled.
- - vehicleRoutes: The optimized schedule
+ - solution: The optimized schedule
 
 Examples
 --------

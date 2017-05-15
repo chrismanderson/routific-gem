@@ -1,7 +1,8 @@
 module RoutificApi
   # This class represents a vehicle in the fleet
   class Vehicle
-    attr_accessor :id, :start_location, :end_location, :shift_start, :shift_end, :capacity
+    attr_accessor :id, :start_location, :end_location, :shift_start, :shift_end,
+                  :capacity
 
     # Constructor
     #
@@ -18,12 +19,12 @@ module RoutificApi
 
       @id = id
       @start_location = RoutificApi::Location.new(params["start_location"])
-      if params["end_location"]
-        @end_location = RoutificApi::Location.new(params["end_location"])
+      if params['end_location']
+        @end_location = RoutificApi::Location.new(params['end_location'])
       end
-      @shift_start = params["shift_start"]
-      @shift_end = params["shift_end"]
-      @capacity = params["capacity"]
+      @shift_start = params['shift_start']
+      @shift_end = params['shift_end']
+      @capacity = params['capacity']
     end
 
     def to_json(options=nil)
@@ -34,11 +35,11 @@ module RoutificApi
     # def to_json(options = nil)
     def as_json(_options = nil)
       json = {}
-      json["start_location"] = self.start_location.as_json
-      json["end_location"] = self.end_location.as_json if self.end_location
-      json["shift_start"] = self.shift_start if self.shift_start
-      json["shift_end"] = self.shift_end if self.shift_end
-      json["capacity"] = self.capacity if self.capacity
+      json['start_location'] = self.start_location.as_json
+      json['end_location'] = self.end_location.as_json if self.end_location
+      json['shift_start'] = self.shift_start if self.shift_start
+      json['shift_end'] = self.shift_end if self.shift_end
+      json['capacity'] = self.capacity if self.capacity
 
       json
     end
@@ -49,7 +50,7 @@ module RoutificApi
     # Raises an ArgumentError if any of the required parameters is not provided.
     # Required parameters are: location
     def validate(params)
-      if params["start_location"].nil?
+      if params['start_location'].nil?
         raise ArgumentError, "'start-location' parameter must be provided"
       end
     end

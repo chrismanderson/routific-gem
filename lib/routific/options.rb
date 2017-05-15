@@ -1,7 +1,7 @@
 module RoutificApi
   # This class represents a set of options for the request
   class Options
-    VALID_PARAMS = %w{ traffic min_visits_per_vehicle balance min_vehicles shortest_distance }
+    VALID_PARAMS = %w{ traffic min_visits_per_vehicle balance min_vehicles shortest_distance polylines }
 
     attr_reader *VALID_PARAMS
 
@@ -14,6 +14,7 @@ module RoutificApi
       @balance = params["balance"]
       @min_vehicles = params["min_vehicles"]
       @shortest_distance = params["shortest_distance"]
+      @polylines = params["polylines"]
     end
 
     def to_json(options)
@@ -29,6 +30,7 @@ module RoutificApi
       jsonData["balance"] = self.balance if self.balance
       jsonData["shortest_distance"] = self.shortest_distance if self.shortest_distance
       jsonData["min_vehicles"] = self.min_vehicles if self.min_vehicles
+      jsonData["polylines"] = true if self.polylines
 
       jsonData
     end

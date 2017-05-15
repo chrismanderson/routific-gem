@@ -1,21 +1,24 @@
 module RoutificApi
-  # This class represents the resulting route returned by the Routific API
-  class Route
-    attr_reader :status, :unserved, :vehicleRoutes, :total_travel_time, :total_idle_time, :total_working_time
+  # This class represents the resulting schedule returned by the Routific API
+  class Schedule
+    attr_reader :status, :unserved, :solution, :total_travel_time, :total_idle_time, :total_working_time, :polyline_precision, :total_distance
 
     # Constructor
-    def initialize(status:, solution: {}, unserved: {}, total_travel_time: 0, total_idle_time: 0, total_working_time: 0, **_)
+    def initialize(status:, solution: {}, unserved: {}, total_travel_time: 0, total_idle_time: 0, total_distance: 0, total_working_time: 0, pl_precision: nil, polylines: {}, **_)
       @status = status
       @unserved = unserved
       @total_idle_time = total_idle_time
       @total_travel_time = total_travel_time
       @total_working_time = total_working_time
+      @polyline_precision = pl_precision
+      @polylines = polylines
+      @total_distance = total_distance
 
       add_solution(solution)
     end
 
     def add_solution(solution)
-      @vehicleRoutes = {}
+      @solution = {}
 
       solution.each do |vehicle_name, way_points|
         # Get all way points for this vehicle
@@ -29,12 +32,12 @@ module RoutificApi
 
     # Adds a new way point for the specified vehicle
     def add_way_point(vehicle_name, way_point)
-      if @vehicleRoutes[vehicle_name].nil?
+      if @solution[vehicle_name].nil?
         # No previous way point was added for the specified vehicle, so create a new array
-        @vehicleRoutes[vehicle_name] = []
+        @solution[vehicle_name] = []
       end
       # Adds the provided way point for the specified vehicle
-      @vehicleRoutes[vehicle_name] << way_point
+      @solution[vehicle_name] << way_point
     end
 
     def number_of_unserved
@@ -45,7 +48,7 @@ module RoutificApi
       # Parse the JSON representation of a route, and return it as a Route object
       def parse(data)
         data = process_data(data)
-        RoutificApi::Route.new(data)
+        RoutificApi::Schedule.new(data)
       end
 
       def process_data(hash)
@@ -54,7 +57,7 @@ module RoutificApi
         end
 
         hash.delete(:num_unserved)
-        hash.delete(:unserved) if hash[:unserved] == nil
+        hash.delete(:unserved) if hash[:unserved].nil?
 
         hash
       end

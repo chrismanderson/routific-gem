@@ -5,10 +5,11 @@ http_interactions:
     uri: https://api.routific.com/v1/vrp
     body:
       encoding: UTF-8
-      string: '{"visits":{"order_1":{"start":"9:00","end":"12:00","duration":10,"location":{"name":"6800
+      string: '{"visits":{"order_1":{"start":"9:00","end":"10:00","duration":15,"location":{"name":"6800
+        Cambie","lat":49.227107,"lng":-123.1163085}},"order_2":{"start":"12:00","end":"13:00","duration":15,"location":{"name":"6800
         Cambie","lat":49.227107,"lng":-123.1163085}}},"fleet":{"vehicle_1":{"start_location":{"name":"800
         Kingsway","lat":49.2553636,"lng":-123.0873365},"end_location":{"name":"800
-        Kingsway","lat":49.2553636,"lng":-123.0873365},"shift_start":"8:00","shift_end":"12:00"}},"options":{"traffic":"slow"}}'
+        Kingsway","lat":49.2553636,"lng":-123.0873365},"shift_start":"8:00","shift_end":"13:00"}},"options":{"traffic":"slow","polylines":true}}'
     headers:
       User-Agent:
       - Faraday v0.9.2
@@ -26,31 +27,36 @@ http_interactions:
       message: OK
     headers:
       Access-Control-Allow-Headers:
-      - Content-Type, Authorization, Routific-App
+      - Content-Type, Authorization, Routific-App, X-Requested-With
       Access-Control-Allow-Methods:
       - GET,PUT,POST,DELETE,OPTIONS
       Access-Control-Allow-Origin:
       - "*"
+      Cache-Control:
+      - no-cache="set-cookie"
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 13 Sep 2016 16:14:15 GMT
+      - Mon, 15 May 2017 18:21:14 GMT
       Server:
       - nginx/1.8.1
+      Set-Cookie:
+      - AWSELB=A14B2BA702BE075C31BDCD09CFE61BC8A4A5E94E0EF4F3B5CF97E6187D91CF5FABAF5EC611E19F37ACD0EAE8510476AC11F0ED9B967A357287C78604D50F03D0834A49BAC6;PATH=/;MAX-AGE=30
       X-Request-Id:
-      - 2db931e9-f6f8-42a9-b80f-615da402772a
+      - '09fbd9d0-f147-44d2-838c-7d40489d65a7'
       X-Response-Time:
-      - 267 ms
+      - 296 ms
       Content-Length:
-      - '216'
+      - '732'
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
-      string: '{"status":"success","total_travel_time":26.366667,"total_idle_time":0,"num_unserved":0,"unserved":null,"solution":{"vehicle_1":[{"location_id":"vehicle_1_start","location_name":"800
-        Kingsway","arrival_time":"08:46"},{"location_id":"order_1","location_name":"6800
-        Cambie","arrival_time":"09:00","finish_time":"09:10"},{"location_id":"vehicle_1_end","location_name":"800
-        Kingsway","arrival_time":"09:22"}]}}'
+      string: '{"status":"success","total_travel_time":33,"total_idle_time":120,"total_break_time":0,"num_unserved":0,"unserved":null,"solution":{"vehicle_1":[{"location_id":"vehicle_1_start","location_name":"800
+        Kingsway","arrival_time":"09:27","distance":0},{"location_id":"order_1","location_name":"6800
+        Cambie","arrival_time":"09:45","finish_time":"10:00","distance":5693.1},{"location_id":"order_2","location_name":"6800
+        Cambie","arrival_time":"10:00","idle_time":120,"finish_time":"12:15","distance":0},{"location_id":"vehicle_1_end","location_name":"800
+        Kingsway","arrival_time":"12:31","distance":5394.4}]},"total_working_time":183,"pl_precision":6,"polylines":{"vehicle_1":["gai}|AnwswiFzm@scB~H?g@r{@g@vy@S~_Ag@zc@Snn@zw@nAnx@z@rv@nArv@z@by@z@~k@z@rI?~a@S~_AnAn}@z@faAz@fr@f@rI?b~@z@r{@z@vt@z@vt@Rja@Rj{BjC~nAz@~\\Rbt@f@nx@z@nqAbB~M?~RR~_Af@vt@Rzw@nAzw@f@rv@z@nx@Rbt@z@r`AnASjf@Srb@{@bdCwBvtEg@bj@Sbj@Sfh@g@fh@Snn@S~f@g@bj@Sns@Srg@g@fh@Szw@g@fc@Snd@{@by@g@by@kC~oC_DbiCcBbfBkCznBk\\g@{YoAcG???_hBkCo}@kCkz@{@_v@cBgw@Sg|@oAz@sl@vBs~AR{Tf@s{@g@cL?{JjC{pAfEkcDbBgsBbBoKRkR?kCR_D?kCRw`@?kCRcj@Ro_@z@_`AR_{@RcLRoi@f@os@RgY?oPRw`@oAkHRc[Rox@f@_{@z@{iB?gc@nAkhDRwj@_SS_N?oqAcBox@{@ct@g@_]S_oA{@k{BkCka@Swt@Swt@{@s{@{@c~@{@sI?gr@g@gaA{@o}@{@_`AoA_b@RsI?_l@{@cy@{@sv@{@sv@oAox@{@{w@oAgw@{@kk@_DkHwGoAsI?sIjCkH~p@ojBfEkM"]},"distances":{"vehicle_1":11.0875},"total_distance":11.0875}'
     http_version: 
-  recorded_at: Tue, 13 Sep 2016 16:14:15 GMT
+  recorded_at: Mon, 15 May 2017 18:21:14 GMT
 recorded_with: VCR 3.0.3

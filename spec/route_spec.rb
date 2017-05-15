@@ -1,6 +1,6 @@
 require_relative './helper/spec_helper'
 
-describe RoutificApi::Route do
+describe RoutificApi::Schedule do
   subject(:route) { Factory::ROUTE }
 
   it "has status" do
@@ -23,9 +23,9 @@ describe RoutificApi::Route do
     expect(route.number_of_unserved).to eq(Factory::ROUTE_UNSERVED.count)
   end
 
-  describe "#vehicleRoutes" do
+  describe "#solution" do
     it "is a Hash" do
-      expect(route.vehicleRoutes).to be_instance_of(Hash)
+      expect(route.solution).to be_instance_of(Hash)
     end
   end
 
@@ -34,18 +34,18 @@ describe RoutificApi::Route do
       route.add_way_point(Factory::VEHICLE_NAME, Factory::WAY_POINT)
     end
 
-    it "creates a new key in vehicleRoutes" do
-      expect(route.vehicleRoutes).to include(Factory::VEHICLE_NAME)
+    it "creates a new key in solution" do
+      expect(route.solution).to include(Factory::VEHICLE_NAME)
     end
 
-    it "stores new waypoint into vehicleRoutes" do
-      expect(route.vehicleRoutes[Factory::VEHICLE_NAME]).to include(Factory::WAY_POINT)
+    it "stores new waypoint into solution" do
+      expect(route.solution[Factory::VEHICLE_NAME]).to include(Factory::WAY_POINT)
     end
   end
 
   describe "#parse" do
     it "does not fail when fed extra parameters" do
-      expect { RoutificApi::Route.new(status: 'success', extra: 'extra') }.to_not raise_error
+      expect { RoutificApi::Schedule.new(status: 'success', extra: 'extra') }.to_not raise_error
     end
   end
 end

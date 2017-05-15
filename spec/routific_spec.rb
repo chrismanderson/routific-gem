@@ -81,8 +81,20 @@ describe Routific do
         routific.add_visit(
           "order_1",
           "start" => "9:00",
-          "end" => "12:00",
-          "duration" => 10,
+          "end" => "10:00",
+          "duration" => 15,
+          "location" => {
+            "name" => "6800 Cambie",
+            "lat" => 49.227107,
+            "lng" => -123.1163085
+          }
+        )
+
+        routific.add_visit(
+          "order_2",
+          "start" => "12:00",
+          "end" => "13:00",
+          "duration" => 15,
           "location" => {
             "name" => "6800 Cambie",
             "lat" => 49.227107,
@@ -103,25 +115,27 @@ describe Routific do
             "lng" => -123.0873365
           },
           "shift_start" => "8:00",
-          "shift_end" => "12:00"
+          "shift_end" => "13:00"
         )
       end
 
       it "returns a Route instance" do
         VCR.use_cassette 'routific/api_response/get_route' do
           route = routific.get_route
-          expect(route).to be_instance_of(RoutificApi::Route)
+          expect(route).to be_instance_of(RoutificApi::Schedule)
         end
       end
 
       it "attaches optional data hash" do
         routific.add_options(
-          "traffic" => "slow"
+          "traffic" => "slow",
+          "polylines" => "true"
         )
 
         VCR.use_cassette 'routific/api_response/with_data_hash' do
           route = routific.get_route
-          expect(route).to be_instance_of(RoutificApi::Route)
+          expect(route).to be_instance_of(RoutificApi::Schedule)
+          expect(route.polyline_precision).to eq(6)
         end
       end
     end
@@ -188,7 +202,7 @@ describe Routific do
 
           it "returns a Route instance" do
             VCR.use_cassette 'routific/api_response' do
-              expect(Routific.get_route(@data)).to be_instance_of(RoutificApi::Route)
+              expect(Routific.get_route(@data)).to be_instance_of(RoutificApi::Schedule)
             end
           end
         end
@@ -200,7 +214,7 @@ describe Routific do
 
           it "returns a Route instance" do
             VCR.use_cassette 'routific/api_response' do
-              expect(Routific.get_route(@data, ENV["API_KEY"])).to be_instance_of(RoutificApi::Route)
+              expect(Routific.get_route(@data, ENV["API_KEY"])).to be_instance_of(RoutificApi::Schedule)
             end
           end
 
@@ -208,7 +222,7 @@ describe Routific do
             key = ENV["API_KEY"].sub(/bearer /, '')
             expect(/bearer /.match(key).nil?).to be true
             VCR.use_cassette 'routific/api_response' do
-              expect(Routific.get_route(@data, key)).to be_instance_of(RoutificApi::Route)
+              expect(Routific.get_route(@data, key)).to be_instance_of(RoutificApi::Schedule)
             end
           end
         end
@@ -293,7 +307,7 @@ describe Routific do
 
           it "returns a Route instance" do
             VCR.use_cassette 'routific/api_response/fix' do
-              expect(Routific.fix_route(@data)).to be_instance_of(RoutificApi::Route)
+              expect(Routific.fix_route(@data)).to be_instance_of(RoutificApi::Schedule)
             end
           end
         end
@@ -306,7 +320,7 @@ describe Routific do
 
           it "returns a Route instance" do
             VCR.use_cassette 'routific/api_response/fix' do
-              expect(Routific.fix_route(@data, ENV["API_KEY"])).to be_instance_of(RoutificApi::Route)
+              expect(Routific.fix_route(@data, ENV["API_KEY"])).to be_instance_of(RoutificApi::Schedule)
             end
           end
 
@@ -314,7 +328,7 @@ describe Routific do
             key = ENV["API_KEY"].sub(/bearer /, '')
             expect(/bearer /.match(key).nil?).to be true
             VCR.use_cassette 'routific/api_response/fix' do
-              expect(Routific.fix_route(@data, key)).to be_instance_of(RoutificApi::Route)
+              expect(Routific.fix_route(@data, key)).to be_instance_of(RoutificApi::Schedule)
             end
           end
         end

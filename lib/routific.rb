@@ -4,7 +4,7 @@ require 'json'
 require_relative './routific/location'
 require_relative './routific/visit'
 require_relative './routific/vehicle'
-require_relative './routific/route'
+require_relative './routific/schedule'
 require_relative './routific/way_point'
 require_relative './routific/options'
 require_relative './routific/solution'
@@ -163,8 +163,8 @@ class Routific
       # Parse the HTTP request response to JSON
       json = JSON.parse(response.body)
 
-      # Parse the JSON representation into a RoutificApi::Route object
-      RoutificApi::Route.parse(json)
+      # Parse the JSON representation into a RoutificApi::Schedule object
+      RoutificApi::Schedule.parse(json)
     end
 
     def prefixed_token(token)

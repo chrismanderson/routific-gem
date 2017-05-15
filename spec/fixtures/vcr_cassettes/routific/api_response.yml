@@ -26,31 +26,35 @@ http_interactions:
       message: OK
     headers:
       Access-Control-Allow-Headers:
-      - Content-Type, Authorization, Routific-App
+      - Content-Type, Authorization, Routific-App, X-Requested-With
       Access-Control-Allow-Methods:
       - GET,PUT,POST,DELETE,OPTIONS
       Access-Control-Allow-Origin:
       - "*"
+      Cache-Control:
+      - no-cache="set-cookie"
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 13 Sep 2016 16:14:15 GMT
+      - Mon, 15 May 2017 18:21:15 GMT
       Server:
       - nginx/1.8.1
+      Set-Cookie:
+      - AWSELB=A14B2BA702BE075C31BDCD09CFE61BC8A4A5E94E0EF4F3B5CF97E6187D91CF5FABAF5EC6117FF1201A5640A5C10C67F99486382C0EBBE2FD40E508658AC1DED3DC250F8DC6;PATH=/;MAX-AGE=30
       X-Request-Id:
-      - b359f548-83ba-429b-8acd-ec9f4903780d
+      - 66dd78ab-7949-4266-9b4d-760d9250cd57
       X-Response-Time:
-      - 167 ms
+      - 280 ms
       Content-Length:
-      - '215'
+      - '228'
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
-      string: '{"status":"success","total_travel_time":15.066667,"total_idle_time":0,"num_unserved":0,"unserved":null,"solution":{"vehicle_1":[{"location_id":"vehicle_1_start","location_name":"800
-        Kingsway","arrival_time":"08:52"},{"location_id":"order_1","location_name":"6800
+      string: '{"status":"success","total_travel_time":19,"total_idle_time":0,"total_break_time":0,"num_unserved":0,"unserved":null,"solution":{"vehicle_1":[{"location_id":"vehicle_1_start","location_name":"800
+        Kingsway","arrival_time":"08:49"},{"location_id":"order_1","location_name":"6800
         Cambie","arrival_time":"09:00","finish_time":"09:10"},{"location_id":"vehicle_1_end","location_name":"800
-        Kingsway","arrival_time":"09:17"}]}}'
+        Kingsway","arrival_time":"09:19"}]},"total_working_time":29}'
     http_version: 
-  recorded_at: Tue, 13 Sep 2016 16:14:15 GMT
+  recorded_at: Mon, 15 May 2017 18:21:15 GMT
 recorded_with: VCR 3.0.3

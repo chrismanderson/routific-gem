@@ -17,7 +17,7 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 EndAlignment:
-  AlignWith: variable
+  EnforcedStyleAlignWith: variable
 
 Metrics/LineLength:
   Max: 160

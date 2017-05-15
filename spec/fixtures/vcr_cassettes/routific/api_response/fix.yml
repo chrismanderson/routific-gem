@@ -29,34 +29,38 @@ http_interactions:
       message: OK
     headers:
       Access-Control-Allow-Headers:
-      - Content-Type, Authorization, Routific-App
+      - Content-Type, Authorization, Routific-App, X-Requested-With
       Access-Control-Allow-Methods:
       - GET,PUT,POST,DELETE,OPTIONS
       Access-Control-Allow-Origin:
       - "*"
+      Cache-Control:
+      - no-cache="set-cookie"
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 13 Sep 2016 16:14:15 GMT
+      - Mon, 15 May 2017 18:21:15 GMT
       Server:
       - nginx/1.8.1
+      Set-Cookie:
+      - AWSELB=A14B2BA702BE075C31BDCD09CFE61BC8A4A5E94E0EB8260B79052B56D5AC8FEF08FB0978B6AC6EBCDF0BB51C7CA0413412208305CCC3DCD260EC39D1ACFA565273603B750D;PATH=/;MAX-AGE=30
       X-Request-Id:
-      - b72239db-efd4-4b33-926e-bb577769e7f4
+      - 2ba49401-a795-413d-921a-7cb09d5e569b
       X-Response-Time:
-      - 281 ms
+      - 199 ms
       Content-Length:
-      - '248'
+      - '259'
       Connection:
       - keep-alive
     body:
       encoding: ASCII-8BIT
-      string: '{"status":"success","total_travel_time":15.066667,"total_idle_time":0,"num_unserved":0,"unserved":null,"solution":{"vehicle_1":[{"location_id":"vehicle_1_start","location_name":"800
-        Kingsway","arrival_time":"08:52"},{"location_id":"order_2","location_name":"6800
+      string: '{"status":"success","total_travel_time":19,"total_idle_time":0,"total_break_time":0,"num_unserved":0,"unserved":null,"solution":{"vehicle_1":[{"location_id":"vehicle_1_start","location_name":"800
+        Kingsway","arrival_time":"08:49"},{"location_id":"order_2","location_name":"6800
         Cambie","arrival_time":"09:00","finish_time":"09:10"},{"location_id":"order_1","location_name":"6800
         Cambie","arrival_time":"09:10","finish_time":"09:20"},{"location_id":"vehicle_1_end","location_name":"800
-        Kingsway","arrival_time":"09:27"}],"vehicle_2":[{"location_id":"vehicle_2_start","location_name":"800
+        Kingsway","arrival_time":"09:29"}],"vehicle_2":[{"location_id":"vehicle_2_start","location_name":"800
         Kingsway","arrival_time":"08:00"},{"location_id":"vehicle_2_end","location_name":"800
-        Kingsway","arrival_time":"08:00"}]}}'
+        Kingsway","arrival_time":"08:00"}]},"total_working_time":39}'
     http_version: 
-  recorded_at: Tue, 13 Sep 2016 16:14:15 GMT
+  recorded_at: Mon, 15 May 2017 18:21:15 GMT
 recorded_with: VCR 3.0.3

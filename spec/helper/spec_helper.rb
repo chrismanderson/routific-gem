@@ -19,8 +19,7 @@ RSpec.configure do |c|
     vcr_config.extend VCR::RSpec::Macros
 
     vcr_config.default_cassette_options = {
-      :match_requests_on => [:method, :uri, :headers],
-      :decode_compressed_response => true
+      :match_requests_on => [:method, :uri, :headers, :body]
     }
   end
 end

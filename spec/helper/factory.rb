@@ -73,7 +73,7 @@ class Factory
   ROUTE_UNSERVED = { Faker::Lorem.word => Faker::Lorem.word }
   ROUTE_TOTAL_IDLE_TIME = 10
   ROUTE_TOTAL_TRAVEL_TIME = 20
-  ROUTE = RoutificApi::Route.new(
+  ROUTE = RoutificApi::Schedule.new(
     status: ROUTE_STATUS,
     unserved: ROUTE_UNSERVED,
     total_idle_time: ROUTE_TOTAL_IDLE_TIME,
