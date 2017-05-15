@@ -1,7 +1,7 @@
 module RoutificApi
   # This class represents the resulting schedule returned by the Routific API
   class Schedule
-    attr_reader :status, :unserved, :solution, :total_travel_time, :total_idle_time, :total_working_time, :polyline_precision, :total_distance
+    attr_reader :status, :unserved, :solution, :total_travel_time, :total_idle_time, :total_working_time, :polyline_precision, :polylines, :total_distance
 
     # Constructor
     def initialize(status:, solution: {}, unserved: {}, total_travel_time: 0, total_idle_time: 0, total_distance: 0, total_working_time: 0, pl_precision: nil, polylines: {}, **_)
